@@ -9,5 +9,5 @@ publish:
     email: $$DOCKERHUB_EMAIL
     registry_login: true
     tag: latest
-    docker_host: tcp://172.17.42.1:2375 
+    docker_host: tcp://172.16.204.198:5555
     
