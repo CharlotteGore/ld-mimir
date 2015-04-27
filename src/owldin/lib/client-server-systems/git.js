@@ -39,6 +39,24 @@ module.exports = function (repoPath){
 
         });
 
+      },
+
+      'git-push' : function (msg, conn){
+
+        repo.push(function (err, stdout, stderr){
+
+          conn.write(JSON.stringify({
+            'git-push' : {
+              id : msg.id,
+              packet : {
+                out : stdout,
+                err : stderr
+              }
+            }
+          }))
+
+        })
+
       }
 
     }

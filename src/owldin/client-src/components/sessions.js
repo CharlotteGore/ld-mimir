@@ -30,6 +30,7 @@ module.exports = function (app, sessionHandlers, box){
   var terminalSessionCount = 0;
   var commandSessionCount = 0;
   var commitSessionCount = 0;
+  var pushSessionCount = 0;
 
   function getEditor (editor){
 
@@ -49,6 +50,8 @@ module.exports = function (app, sessionHandlers, box){
       return sessionHandlers.commands;
     } else if (editor === "commit"){
       return sessionHandlers.commit;
+    } else if (editor === "push"){
+      return sessionHandlers.push;
     }
   }
 
@@ -278,6 +281,18 @@ module.exports = function (app, sessionHandlers, box){
     var commitId = 'commit-' + (++commitSessionCount);
 
     var session = initialiseSession({ path : commitId}, commitId, 'commit', function (session){
+
+      resumeSession(session);
+
+    });
+
+  });
+
+  app.on('new-push-session', function (){
+
+    var commitId = 'push-' + (++commitSessionCount);
+
+    var session = initialiseSession({ path : commitId}, commitId, 'push', function (session){
 
       resumeSession(session);
 
