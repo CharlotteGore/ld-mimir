@@ -1,4 +1,5 @@
 var marked = require('marked');
+var crypto = require('crypto');
 
 var dom = require('green-mesa-dom');
 
@@ -10,6 +11,7 @@ module.exports = function (app, contentView){
   var emitter = new (require('events')).EventEmitter();
 
   var $element = dom('<div></div>');
+
 
   $element.addClass('preview');
   $element.css({
@@ -174,7 +176,12 @@ module.exports = function (app, contentView){
     }
 
     if (currentSession.entity.mime === "text/x-markdown"){
-      $element.html('<div class="md-preview-content">' + marked(currentSession.body) + '</div>');
+
+      var shasum = crypto.createHash('sha256');
+      shasum.update(path.relative('/', currentSession.entity.path))
+      var hash = (shasum.digest('hex')).toUpperCase();
+      $element.html(downloadLinks(hash) + '<div class="md-preview-content">' + marked(currentSession.body) + '</div>');
+
     } else if (currentSession.entity.mime === "application/json"){
       $element.html('<div class="md-preview-content">' + marked('~~~json\n' + JSON.stringify(JSON.parse(currentSession.body), false, 4) + '~~~\n') + '</div>');
 
@@ -242,5 +249,17 @@ module.exports = function (app, contentView){
   }
 
   return emitter;
+
+  function downloadLinks (hash){
+
+    return [
+      '<ul>',
+        '<li><a target="blank" href="' + app.vfs.getURI('/application/pdf/' + hash + '.pdf') + '">Download PDF preview</a></li>',
+        '<li><a target="blank" href="' + app.vfs.getURI('/application/vnd.openxmlformats-officedocument.wordprocessingml.document/' + hash + '.docx') + '">Download Word preview</a></li>',
+        '<li><a target="blank" href="' + app.vfs.getURI('/text/html/' + hash + '.html') + '">Download HTML preview</a></li>',
+      '</ul>'
+    ].join('\n');
+    
+  }
 
 }
