@@ -6,8 +6,9 @@ module.exports = function (app, box){
     '<ul class="box-inner menu-content">' +
     '<li><span class="typcn typcn-th-menu"></span>' + 
       '<ul>' + 
-        '<li><a href="#" rel="rels/save-file"><span class="typcn typcn-arrow-sync"></span>Save all</a></li>' + 
-        '<li><a href="#" rel="rels/commit-session"><span class="typcn typcn-arrow-sync"></span>Commit</a></li>' + 
+        '<li><a href="#" rel="rels/save-file"><span class="typcn typcn-arrow-sync"></span>Save files</a></li>' + 
+        '<li><a href="#" rel="rels/commit-session"><span class="typcn typcn-arrow-sync"></span>Commit your changes</a></li>' + 
+        '<li><a href="#" rel="rels/push-session"><span class="typcn typcn-arrow-sync"></span>Submit your commits</a></li>' + 
         '<li><a href="#" rel="rels/new-terminal"><span class="typcn typcn-device-desktop"></span>New Terminal</a></li>' + 
         '<li><a href="#" rel="rels/new-command"><span class="typcn typcn-spanner"></span>Run command</a></li>' + 
       '</ul>' + 
@@ -27,6 +28,13 @@ module.exports = function (app, box){
 
     e.preventDefault();
     app.emit('new-commit-session');
+
+  });
+
+  dom('a[rel="rels/push-session"]', $menu).on('click', function (e){
+
+    e.preventDefault();
+    app.emit('new-push-session');
 
   });
 

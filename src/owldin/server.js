@@ -82,46 +82,6 @@ watcher.on('rename', function (filename, oldFilename){
 
 });
 
-/*
-
-require('watch').watchTree(projectRoot,function (f, curr, prev) {
-    if (typeof f == "object" && prev === null && curr === null) {
-      // Finished walking the tree
-      console.log('tree walked');
-    } else if (prev === null) {
-      // f is a new file
-
-      if (!sCache[f] || !_.isEqual(sCache[f], curr)){
-          broker.emit('create', {
-            path : f.replace(projectRoot, '')
-          });
-          sCache[f] = curr;
-      }
-
-    } else if (curr.nlink === 0) {
-      // f was removed
-      if (!sCache[f] || !_.isEqual(sCache[f], curr)){
-          broker.emit('delete', {
-            path : f.replace(projectRoot, '')
-          });
-          sCache[f] = curr;
-      }
-
-
-    } else {
-
-      if (!f.match(/\.swp$/)){
-
-        broker.emit('update', {
-          path : f.replace(projectRoot, '')
-        });
-
-      }
-      // f was changed
-    }
-  });
-*/
-
 function createApplicationAndBeginListening (port, vfs, broker){
 
   var app = express({

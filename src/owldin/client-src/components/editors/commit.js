@@ -3,14 +3,6 @@ var each = require('foreach');
 
 module.exports = function (app, contentView){
 
-  /*
-  var term = new Terminal({
-    cols: 80,
-    rows: 24,
-    screenKeys: true
-  });
-*/
-
   var $element = dom('<div></div>');
 
   var staging = function (){
@@ -85,9 +77,6 @@ module.exports = function (app, contentView){
       }
 
     }
-
-
-    debugger;
 
     return [
       '<tr>',
