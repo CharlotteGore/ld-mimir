@@ -516,3 +516,17 @@ blockquote.diff {
     width: 50%;
     height: 200px;
 }
+
+.preview ul.downloads {
+    display: flex;
+    list-style: none;
+}
+
+.preview ul.downloads li {
+    padding-right:20px
+}
+
+.preview ul.downloads li a {
+    color: #000000;
+    text-decoration: none;
+}
