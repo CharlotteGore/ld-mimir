@@ -253,10 +253,10 @@ module.exports = function (app, contentView){
   function downloadLinks (hash){
 
     return [
-      '<ul>',
-        '<li><a target="blank" href="' + app.vfs.getURI('/application/pdf/' + hash + '.pdf') + '">Download PDF preview</a></li>',
-        '<li><a target="blank" href="' + app.vfs.getURI('/application/vnd.openxmlformats-officedocument.wordprocessingml.document/' + hash + '.docx') + '">Download Word preview</a></li>',
-        '<li><a target="blank" href="' + app.vfs.getURI('/text/html/' + hash + '.html') + '">Download HTML preview</a></li>',
+      '<ul class="downloads">',
+        '<li><a target="blank" href="' + app.vfs.getURI('/.build/application/pdf/' + hash + '.pdf') + '">Download PDF preview <span class="typcn typcn-arrow-forward"></span></a></li>',
+        '<li><a target="blank" href="' + app.vfs.getURI('/.build/application/vnd.openxmlformats-officedocument.wordprocessingml.document/' + hash + '.docx') + '">Download Word preview <span class="typcn typcn-arrow-forward"></a></li>',
+        '<li><a target="blank" href="' + app.vfs.getURI('/.build/text/html/' + hash + '.html') + '">Download HTML preview <span class="typcn typcn-arrow-forward"></a></li>',
       '</ul>'
     ].join('\n');
     

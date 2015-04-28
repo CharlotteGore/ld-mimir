@@ -30,7 +30,7 @@ function watchAllSubdirectories (pathName){
 
             files.forEach(function (file){
 
-                if (file !== ".git"){
+                if (file.indexOf(".git") === -1){
 
                     fs.stat(path.join(pathName, file), function (err, stats){
 
