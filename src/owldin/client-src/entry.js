@@ -27,7 +27,8 @@ var sessionHandlers = {
   newDocument : require('./components/editors/new-document.js')(app, layout.editor),
   commands : require('./components/editors/command.js')(app, layout.editor),
   commit : require('./components/editors/commit.js')(app, layout.editor),
-  push : require('./components/editors/push.js')(app, layout.editor)
+  push : require('./components/editors/push.js')(app, layout.editor),
+  build : require('./components/editors/build.js')(app, layout.editor)
 }
 
 var sessions = require('./components/sessions.js')(app, sessionHandlers, layout.tabs);

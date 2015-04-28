@@ -31,6 +31,7 @@ module.exports = function (app, sessionHandlers, box){
   var commandSessionCount = 0;
   var commitSessionCount = 0;
   var pushSessionCount = 0;
+  var buildSessionCount = 0;
 
   function getEditor (editor){
 
@@ -52,6 +53,8 @@ module.exports = function (app, sessionHandlers, box){
       return sessionHandlers.commit;
     } else if (editor === "push"){
       return sessionHandlers.push;
+    } else if (editor === "build"){
+      return sessionHandlers.build;
     }
   }
 
@@ -269,6 +272,18 @@ module.exports = function (app, sessionHandlers, box){
     var commandId = 'command-' + (++commandSessionCount);
 
     var session = initialiseSession({ path : commandId}, commandId, 'command', function (session){
+
+      resumeSession(session);
+
+    });
+
+  });
+
+  app.on('new-build-session', function (){
+
+    var commandId = 'build-' + (++buildSessionCount);
+
+    var session = initialiseSession({ path : commandId}, commandId, 'build', function (session){
 
       resumeSession(session);
 

@@ -3,6 +3,7 @@ var path = require('path');
 var gitStatus = require('./git-status.js');
 var gitCommit = require('./git-commit.js');
 var gitPush = require('./git-push.js');
+var gitBuild = require('./project-build.js');
 
 module.exports = function (repoPath){
 
@@ -15,6 +16,9 @@ module.exports = function (repoPath){
     },
     push : function (callback){
       return gitPush(repoPath, callback);
+    },
+    build : function (callback){
+      return gitBuild(repoPath, callback);
     }
   }
 

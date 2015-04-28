@@ -57,6 +57,24 @@ module.exports = function (repoPath){
 
         })
 
+      },
+
+      'project-build' : function (msg, conn){
+
+        repo.build(function (err, stdout, stderr){
+
+          conn.write(JSON.stringify({
+            'project-build' : {
+              id : msg.id,
+              packet : {
+                out : stdout,
+                err : stderr
+              }
+            }
+          }))
+
+        })
+
       }
 
     }
