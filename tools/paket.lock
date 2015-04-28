@@ -1,5 +1,5 @@
 NUGET
   remote: https://nuget.org/api/v2
   specs:
-    NICE.Freya (1.2.6)
-    NICE.git2prov (1.0.13)
+    NICE.Freya (1.2.7)
+    NICE.git2prov (1.2.2)
