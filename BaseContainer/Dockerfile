@@ -5,5 +5,5 @@ RUN apt-get update && apt-get install -yy git graphviz raptor-utils python make 
     npm install -g grunt &&\
     ln /usr/bin/nodejs /usr/bin/node
 
-RUN apt-get install texlive-xelatex
+RUN apt-get install texlive-xetex
 
