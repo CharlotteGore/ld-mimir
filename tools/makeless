@@ -1,4 +1,4 @@
 #!/bin/bash
 set -exf
 
-git2prov --path /git --since HEAD --showcontent --showhistory --showcompilation --includeworkingarea | freya --output /git/.build --compilation "http://schema/ns/compilation"
+git2prov --path /git --since HEAD --showhistory --showcompilation --includeworkingarea | freya --output /git/.build --compilation "http://schema/ns/compilation"

@@ -5,6 +5,13 @@ mimir:
     - "80:80"
   links:
     - schema
+    - raw
+  volumes_from:
+    - data
+raw:
+  image: nice/ld-raw
+  expose:
+    - 80
   volumes_from:
     - data
 schema:
