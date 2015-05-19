@@ -17,6 +17,8 @@ module.exports = function (app, contentView){
 
   var emitter = new (require('events')).EventEmitter();
 
+  var skosser = require('./skos.js')(app);
+
   var $element = dom('<div></div>');
 
   $element.css({
@@ -123,7 +125,6 @@ app.on('entity-renamed', function (type, path, oldPath){
 
   if (session){
 
-    debugger;
 
   }
 
@@ -184,6 +185,8 @@ app.on('entity-renamed', function (type, path, oldPath){
     editor.getSession().setUseWrapMode(true);
     editor.setShowPrintMargin(false);
 
+    var lastChange = false, checking = false;
+
     editor.on('change', function (){
 
       if (currentSession){
@@ -196,6 +199,8 @@ app.on('entity-renamed', function (type, path, oldPath){
           app.emit('session-synchronised', currentSession.entity._sessionId);
         }
       }
+
+      skosser.change(editor);
 
     });
 
@@ -253,6 +258,8 @@ app.on('entity-renamed', function (type, path, oldPath){
       display : ''
     })
 
+    skosser.activate();
+
   }
 
   emitter.pause = function pauseEditSession (entity){
@@ -270,6 +277,8 @@ app.on('entity-renamed', function (type, path, oldPath){
     $element.css({
       display: 'none'
     });
+
+    skosser.deactivate();
 
 
   }

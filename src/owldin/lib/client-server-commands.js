@@ -11,7 +11,8 @@ module.exports = function (server, broker){
   var plugins = {
     git : require('./client-server-systems/git.js')(),
     shell : require('./client-server-systems/shell.js')(),
-    terminal : require('./client-server-systems/terminal.js')()
+    terminal : require('./client-server-systems/terminal.js')(),
+    skos : require('./client-server-systems/skos.js')()
   }
 
   var socketConnections = [];

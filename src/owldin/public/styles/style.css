@@ -213,46 +213,6 @@ span.typcn {
     background: #000;
 }
 
-
-
-.autocomplete-popup {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: rgb(245, 239, 212);
-  z-index:1;
-}
-.autocomplete-input {
-  position: absolute;
-  z-index: 1;
-  width: 200px;
-
-}
-.autocomplete-popup li {
-  color: #555;
-  padding: 5px;
-  font-style: italic;
-  font-weight: bold;
-  display: block;
-  min-width: 200px;
-}
-.ld-result {
-  position: absolute;
-  z-index: 1;
-  width: 400px;
-  overflow-y: scroll;
-  background: rgb(245, 239, 212);
-  padding: 20px;
-  color: #333;
-}
-.ld-result .id {
-  font-weight: bold;
-}
-.ld-result div {
-  font-style: italic;
-}
-
 .ace_recommendation {
   font-style: italic;
   color: #9FCFFF;
@@ -495,7 +455,7 @@ blockquote.diff {
     padding: 20px;
     /* background: #eeeeee; */
 }
-
+                                                                                                                                                                                                                              
 .commit .output table {
     /* display: block; */
     background: #dddddd;
@@ -529,4 +489,68 @@ blockquote.diff {
 .preview ul.downloads li a {
     color: #000000;
     text-decoration: none;
+}
+
+.commands .output {
+  overflow-y : scroll;
+}
+
+/* Autocomplete stuff */
+
+.autocomplete-popup {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgb(245, 239, 212);
+  z-index:1;
+}
+.autocomplete-input {
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+
+}
+.autocomplete-popup li {
+  color: #555;
+  padding: 5px;
+  font-style: italic;
+  font-weight: bold;
+  display: block;
+  min-width: 200px;
+}
+.ld-result {
+  /* position: absolute; */
+  z-index: 1;
+  /* width: 400px; */
+  /* overflow-y: scroll; */
+  background: rgb(255,255,255);
+  border: 3px solid #333;
+  color: #333;
+}
+.ld-result ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ld-result ul li {
+    padding:5px;
+    color: #777;
+}
+.ld-result ul li strong {
+  color: #000;
+}
+.ld-result ul li.selected {
+    background: rgb(168, 196, 247);
+}
+.ld-result .id {
+  font-weight: bold;
+}
+.ld-result div {
+  font-style: italic;
+}
+
+.ace_recommendation {
+  font-style: italic;
+  color: #9FCFFF;
 }

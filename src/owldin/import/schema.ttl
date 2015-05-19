@@ -1,0 +1,682 @@
+@prefix : <http://nice.org.uk/ns/qualitystandard#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://nice.org.uk/ns/qualitystandard> .
+
+<http://nice.org.uk/ns/qualitystandard> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+###  http://nice.org.uk/ns/qualitystandard#include_drug_abuse,_alcohol_abuse,_obesity
+
+<http://nice.org.uk/ns/qualitystandard#include_drug_abuse,_alcohol_abuse,_obesity> rdf:type owl:AnnotationProperty ;
+                                                                                   
+                                                                                   rdfs:subPropertyOf rdfs:comment .
+
+
+
+###  http://www.w3.org/2000/01/rdf-schema#comment
+
+rdfs:comment rdf:type owl:AnnotationProperty .
+
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral
+
+rdf:PlainLiteral rdf:type rdfs:Datatype .
+
+
+
+###  http://www.w3.org/2000/01/rdf-schema#Literal
+
+rdfs:Literal rdf:type rdfs:Datatype .
+
+
+
+###  http://www.w3.org/2001/XMLSchema#string
+
+xsd:string rdf:type rdfs:Datatype .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://nice.org.uk/ns/qualitystandard#age
+
+:age rdf:type owl:ObjectProperty ;
+     
+     rdfs:range :AgeGroup ;
+     
+     rdfs:domain <http://nice.org.uk/ns/qualitystandard#pico:Population> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#condition
+
+:condition rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain <http://nice.org.uk/ns/qualitystandard#pico:Population> ;
+           
+           rdfs:range <http://nice.org.uk/ns/qualitystandard#snomed:Disease> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#definedTaskOf
+
+:definedTaskOf rdf:type owl:ObjectProperty ;
+               
+               rdfs:range :QualityStatement ;
+               
+               rdfs:domain :Task .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#definesMeasure
+
+:definesMeasure rdf:type owl:ObjectProperty ;
+                
+                rdfs:comment "one quality statement may hve several measures associated with it." ;
+                
+                rdfs:range :QualityMeasure ;
+                
+                rdfs:domain :QualityStatement ;
+                
+                owl:inverseOf :measureDefinedBy .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#definesTask
+
+:definesTask rdf:type owl:ObjectProperty ;
+             
+             rdfs:comment "connects  proposed action of quality statement to tasks which enable this action to take place" ;
+             
+             rdfs:domain :QualityStatement ;
+             
+             rdfs:range :Task ;
+             
+             owl:inverseOf :definedTaskOf ;
+             
+             rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#hasConcept
+
+:hasConcept rdf:type owl:ObjectProperty ;
+            
+            rdfs:range <http://nice.org.uk/ns/qualitystandard#skos:Concept> ;
+            
+            owl:inverseOf <http://www.w3.org/2004/02/skos/core#inConceptScheme> ;
+            
+            rdfs:domain <http://www.w3.org/2004/02/skos/core#skos:ConceptScheme> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#isSettingOf
+
+:isSettingOf rdf:type owl:ObjectProperty ;
+             
+             rdfs:range :QualityStatement ;
+             
+             rdfs:domain :Setting ;
+             
+             owl:inverseOf :setting .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#isSpecifiedBy
+
+:isSpecifiedBy rdf:type owl:ObjectProperty ;
+               
+               rdfs:range :PopulationSpecifier ;
+               
+               rdfs:domain <http://nice.org.uk/ns/qualitystandard#pico:Population> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#isTargetPopulationOf
+
+:isTargetPopulationOf rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:range :QualityStatement ;
+                      
+                      owl:inverseOf :targetPopulation ;
+                      
+                      rdfs:domain <http://nice.org.uk/ns/qualitystandard#pico:Population> ;
+                      
+                      rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#lifestyleCondition
+
+:lifestyleCondition rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:range :LifestyleCondition ;
+                    
+                    rdfs:domain <http://nice.org.uk/ns/qualitystandard#pico:Population> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#measureDefinedBy
+
+:measureDefinedBy rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:domain :QualityMeasure ;
+                  
+                  rdfs:range :QualityStatement .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#measuresProgressAgainst
+
+:measuresProgressAgainst rdf:type owl:ObjectProperty ;
+                         
+                         rdfs:domain :QualityMeasure ;
+                         
+                         rdfs:range :Task .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#ownsTask
+
+:ownsTask rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :ServiceRole ;
+          
+          rdfs:range :Task ;
+          
+          owl:inverseOf :taskOwner .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#setting
+
+:setting rdf:type owl:ObjectProperty ;
+         
+         rdfs:domain :QualityStatement ;
+         
+         rdfs:range :Setting .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#specifies
+
+:specifies rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :PopulationSpecifier ;
+           
+           owl:inverseOf :isSpecifiedBy ;
+           
+           rdfs:range <http://nice.org.uk/ns/qualitystandard#pico:Population> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#targetPopulation
+
+:targetPopulation rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:domain :QualityStatement ;
+                  
+                  rdfs:range <http://nice.org.uk/ns/qualitystandard#pico:Population> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#taskOwner
+
+:taskOwner rdf:type owl:ObjectProperty ;
+           
+           rdfs:range :ServiceRole ;
+           
+           rdfs:domain :Task .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#prov:generated
+
+<http://nice.org.uk/ns/qualitystandard#prov:generated> rdf:type owl:ObjectProperty ;
+                                                       
+                                                       rdfs:domain :QualityStandard ;
+                                                       
+                                                       rdfs:range :QualityStatement .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#prov:wasGeneratedby
+
+<http://nice.org.uk/ns/qualitystandard#prov:wasGeneratedby> rdf:type owl:ObjectProperty ;
+                                                            
+                                                            rdfs:range :QualityStandard ;
+                                                            
+                                                            rdfs:domain :QualityStatement ;
+                                                            
+                                                            owl:inverseOf <http://nice.org.uk/ns/qualitystandard#prov:generated> .
+
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+
+owl:topObjectProperty rdf:type owl:ObjectProperty .
+
+
+
+###  http://www.w3.org/2004/02/skos/core#inConceptScheme
+
+<http://www.w3.org/2004/02/skos/core#inConceptScheme> rdf:type owl:ObjectProperty ;
+                                                      
+                                                      rdfs:domain <http://nice.org.uk/ns/qualitystandard#skos:Concept> ;
+                                                      
+                                                      rdfs:range <http://www.w3.org/2004/02/skos/core#skos:ConceptScheme> .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://nice.org.uk/ns/qualitystandard#hasDataSource
+
+:hasDataSource rdf:type owl:DatatypeProperty ;
+               
+               rdfs:domain :QualityMeasure ;
+               
+               rdfs:range rdfs:Literal .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#qs::hasDenominator
+
+<http://nice.org.uk/ns/qualitystandard#qs::hasDenominator> rdf:type owl:DatatypeProperty ;
+                                                           
+                                                           rdfs:domain :QualityMeasure ;
+                                                           
+                                                           rdfs:range xsd:string .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#qs::hasNumerator
+
+<http://nice.org.uk/ns/qualitystandard#qs::hasNumerator> rdf:type owl:DatatypeProperty ;
+                                                         
+                                                         rdfs:domain :ProcessMeasure ;
+                                                         
+                                                         rdfs:range xsd:string .
+
+
+
+###  http://purl.org/dc/elements/1.1/identifier
+
+<http://purl.org/dc/elements/1.1/identifier> rdf:type owl:DatatypeProperty ;
+                                             
+                                             rdfs:range rdfs:Literal ;
+                                             
+                                             rdfs:domain owl:Thing .
+
+
+
+###  http://purl.org/dc/elements/1.1/title
+
+<http://purl.org/dc/elements/1.1/title> rdf:type owl:DatatypeProperty ;
+                                        
+                                        rdfs:domain :QualityStandard ;
+                                        
+                                        rdfs:range rdfs:Literal .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://nice.org.uk/ns/qualitystandard#AgeGroup
+
+:AgeGroup rdf:type owl:Class ;
+          
+          rdfs:subClassOf :PopulationSpecifier ;
+          
+          rdfs:comment "Some list of age groups to be defined to support population definition" .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#LifestyleCondition
+
+:LifestyleCondition rdf:type owl:Class ;
+                    
+                    rdfs:subClassOf :PopulationSpecifier ;
+                    
+                    rdfs:comment "to include drug abuse, alcohol abuse and other lifestyle conditions" .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#OutcomeMeasure
+
+:OutcomeMeasure rdf:type owl:Class ;
+                
+                rdfs:subClassOf :QualityMeasure ;
+                
+                owl:disjointWith :ProcessMeasure ,
+                                 :StructureMeasure .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#PopulationSpecifier
+
+:PopulationSpecifier rdf:type owl:Class ;
+                     
+                     rdfs:subClassOf <http://nice.org.uk/ns/qualitystandard#skos:Concept> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#ProcessMeasure
+
+:ProcessMeasure rdf:type owl:Class ;
+                
+                rdfs:subClassOf :QualityMeasure ;
+                
+                owl:disjointWith :StructureMeasure .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#QualityMeasure
+
+:QualityMeasure rdf:type owl:Class ;
+                
+                owl:disjointWith :QualityStandard ,
+                                 :QualityStatement ;
+                
+                rdfs:comment "measure associated with quality statement" .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#QualityStandard
+
+:QualityStandard rdf:type owl:Class ;
+                 
+                 owl:disjointWith :QualityStatement .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#QualityStatement
+
+:QualityStatement rdf:type owl:Class .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#ServiceRole
+
+:ServiceRole rdf:type owl:Class ;
+             
+             rdfs:subClassOf <http://nice.org.uk/ns/qualitystandard#skos:Concept> .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#Setting
+
+:Setting rdf:type owl:Class ;
+         
+         rdfs:subClassOf <http://nice.org.uk/ns/qualitystandard#skos:Concept> ;
+         
+         rdfs:comment "Setting - may be used for setting for population definition as well as setting where action of quality statement should occur" .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#StructureMeasure
+
+:StructureMeasure rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf :QualityMeasure .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#Task
+
+:Task rdf:type owl:Class ;
+      
+      rdfs:comment "specific action that is outlined in \"what the quality statement means for\" ... but only for service providers, commissioners etc. not for patients, carers" .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#pico:Population
+
+<http://nice.org.uk/ns/qualitystandard#pico:Population> rdf:type owl:Class ;
+                                                        
+                                                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :isSpecifiedBy ;
+                                                                              owl:onClass :PopulationSpecifier ;
+                                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger
+                                                                            ] ;
+                                                        
+                                                        rdfs:comment "defined by at least one of the age, gender, ethnicity, disease, lifestyle condition concepts." .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#skos:Concept
+
+<http://nice.org.uk/ns/qualitystandard#skos:Concept> rdf:type owl:Class .
+
+
+
+###  http://nice.org.uk/ns/qualitystandard#snomed:Disease
+
+<http://nice.org.uk/ns/qualitystandard#snomed:Disease> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:subClassOf :PopulationSpecifier ;
+                                                       
+                                                       rdfs:comment "use for medical condition" ,
+                                                                    "Will need to refer to URI specific part of SNOMED or other scheme rather than to whole schema" .
+
+
+
+###  http://www.w3.org/2002/07/owl#Thing
+
+owl:Thing rdf:type owl:Class .
+
+
+
+###  http://www.w3.org/2004/02/skos/core#skos:ConceptScheme
+
+<http://www.w3.org/2004/02/skos/core#skos:ConceptScheme> rdf:type owl:Class ;
+                                                         
+                                                         rdfs:comment "Class for concept schemes that we will be using to populate values for concepts of age, gender , disease etc. These can be a mixture of our own thesauri and external ones such as snomed and will be indicated by a URI" .
+
+
+
+
+###  Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net
+
+@base <http://nice.org.uk/ns/qualitystandard>.
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix base: <http://nice.org.uk/ns/qualitystandard>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix git2prov: <http://nice.org.uk/ns/prov/>.
+@prefix compilation: <http://nice.org.uk/ns/compilation#>.
+@prefix cnt: <http://www.w3.org/2011/content#>.
+@prefix qsc: <http://nice.org.uk/ns/qualitystandard/skos#>.
+@prefix qs: <http://nice.org.uk/ns/qualitystandard#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+qsc:Adults a qs:PopulationSpecifier,
+             owl:NamedIndividual;
+           skos:prefLabel "Adults"^^xsd:string.
+qsc:Children a qs:PopulationSpecifier,
+               owl:NamedIndividual;
+             skos:prefLabel "Children"^^xsd:string.
+qsc:Young-people a qs:PopulationSpecifier,
+                   owl:NamedIndividual;
+                 skos:prefLabel "Young-people"^^xsd:string.
+@base <http://nice.org.uk/ns/qualitystandard>.
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix base: <http://nice.org.uk/ns/qualitystandard>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix git2prov: <http://nice.org.uk/ns/prov/>.
+@prefix compilation: <http://nice.org.uk/ns/compilation#>.
+@prefix cnt: <http://www.w3.org/2011/content#>.
+@prefix qsc: <http://nice.org.uk/ns/qualitystandard/skos#>.
+@prefix qs: <http://nice.org.uk/ns/qualitystandard#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+qsc:AandE a qs:Setting,
+            owl:NamedIndividual;
+          skos:narrower qsc:Hospital;
+          skos:prefLabel "Hospital"^^xsd:string.
+qsc:Care-home a qs:Setting,
+                owl:NamedIndividual;
+              skos:broader qsc:Nursing-home,
+                           qsc:Residential-care-home;
+              skos:prefLabel "Care-home"^^xsd:string.
+qsc:Community a qs:Setting,
+                owl:NamedIndividual;
+              skos:prefLabel "Community"^^xsd:string.
+qsc:Dentist a qs:Setting,
+              owl:NamedIndividual;
+            skos:prefLabel "Dentist"^^xsd:string.
+qsc:Family-planning-clinic a qs:Setting,
+                             owl:NamedIndividual;
+                           skos:narrower qsc:Specialist-Clinic;
+                           skos:prefLabel "Specialist-Clinic"^^xsd:string.
+qsc:GP-practice a qs:Setting,
+                  owl:NamedIndividual;
+                skos:narrower qsc:Primary-Care;
+                skos:prefLabel "Primary-Care"^^xsd:string.
+qsc:Home a qs:Setting,
+           owl:NamedIndividual;
+         skos:prefLabel "Home"^^xsd:string.
+qsc:Hospice a qs:Setting,
+              owl:NamedIndividual;
+            skos:prefLabel "Hospice"^^xsd:string.
+qsc:Hospital a qs:Setting,
+               owl:NamedIndividual;
+             skos:broader qsc:AandE,
+                          qsc:Inpatient-unit,
+                          qsc:Intensive-care-unit,
+                          qsc:Maternity-unit,
+                          qsc:Neonatal-unit,
+                          qsc:Outpatient-unit;
+             skos:prefLabel "Hospital"^^xsd:string.
+qsc:Inpatient-unit a qs:Setting,
+                     owl:NamedIndividual;
+                   skos:broader qsc:Medical-unit,
+                                qsc:Mental-health-unit,
+                                qsc:Surgical-unit;
+                   skos:narrower qsc:Hospital;
+                   skos:prefLabel "Hospital"^^xsd:string.
+qsc:Intensive-care-unit a qs:Setting,
+                          owl:NamedIndividual;
+                        skos:narrower qsc:Hospital;
+                        skos:prefLabel "Hospital"^^xsd:string.
+qsc:Maternity-unit a qs:Setting,
+                     owl:NamedIndividual;
+                   skos:narrower qsc:Hospital;
+                   skos:prefLabel "Hospital"^^xsd:string.
+qsc:Medical-unit a qs:Setting,
+                   owl:NamedIndividual;
+                 skos:narrower qsc:Inpatient-unit;
+                 skos:prefLabel "Hospital"^^xsd:string.
+qsc:Mental-health-unit a qs:Setting,
+                         owl:NamedIndividual;
+                       skos:narrower qsc:Inpatient-unit;
+                       skos:prefLabel "Hospital"^^xsd:string.
+qsc:Minor-injury-unit a qs:Setting,
+                        owl:NamedIndividual;
+                      skos:narrower qsc:Primary-Care;
+                      skos:prefLabel "Primary-Care"^^xsd:string.
+qsc:Neonatal-unit a qs:Setting,
+                    owl:NamedIndividual;
+                  skos:narrower qsc:Hospital;
+                  skos:prefLabel "Hospital"^^xsd:string.
+qsc:Nursing-home a qs:Setting,
+                   owl:NamedIndividual;
+                 skos:narrower qsc:Care-home;
+                 skos:prefLabel "Care-home"^^xsd:string.
+qsc:Out-of-hours-centre a qs:Setting,
+                          owl:NamedIndividual;
+                        skos:narrower qsc:Primary-Care;
+                        skos:prefLabel "Primary-Care"^^xsd:string.
+qsc:Outpatient-unit a qs:Setting,
+                      owl:NamedIndividual;
+                    skos:narrower qsc:Hospital;
+                    skos:prefLabel "Hospital"^^xsd:string.
+qsc:Pharmacy a qs:Setting,
+               owl:NamedIndividual;
+             skos:prefLabel "Pharmacy"^^xsd:string.
+qsc:Primary-Care a qs:Setting,
+                   owl:NamedIndividual;
+                 skos:broader qsc:GP-practice,
+                              qsc:Minor-injury-unit,
+                              qsc:Out-of-hours-centre;
+                 skos:prefLabel "Primary-Care"^^xsd:string.
+qsc:Prison a qs:Setting,
+             owl:NamedIndividual;
+           skos:prefLabel "Prison"^^xsd:string.
+qsc:Rehabilitation-clinic a qs:Setting,
+                            owl:NamedIndividual;
+                          skos:narrower qsc:Specialist-Clinic;
+                          skos:prefLabel "Specialist-Clinic"^^xsd:string.
+qsc:Residential-care-home a qs:Setting,
+                            owl:NamedIndividual;
+                          skos:narrower qsc:Care-home;
+                          skos:prefLabel "Care-home"^^xsd:string.
+qsc:School a qs:Setting,
+             owl:NamedIndividual;
+           skos:prefLabel "School"^^xsd:string.
+qsc:Slimming-clinic a qs:Setting,
+                      owl:NamedIndividual;
+                    skos:narrower qsc:Specialist-Clinic;
+                    skos:prefLabel "Specialist-Clinic"^^xsd:string.
+qsc:Specialist-Clinic a qs:Setting,
+                        owl:NamedIndividual;
+                      skos:broader qsc:Family-planning-clinic,
+                                   qsc:Rehabilitation-clinic,
+                                   qsc:Slimming-clinic;
+                      skos:prefLabel "Specialist-Clinic"^^xsd:string.
+qsc:Surgical-unit a qs:Setting,
+                    owl:NamedIndividual;
+                  skos:narrower qsc:Inpatient-unit;
+                  skos:prefLabel "Hospital"^^xsd:string.
+qsc:Workplace a qs:Setting,
+                owl:NamedIndividual;
+              skos:prefLabel "Workplace"^^xsd:string.
