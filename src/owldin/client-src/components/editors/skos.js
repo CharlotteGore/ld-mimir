@@ -142,8 +142,6 @@ module.exports = function (app){
       });
       active = false;
 
-      act
-
     },
     change : function (editor){
 
