@@ -14,8 +14,6 @@ function watch (pathName){
         callback : callback.bind(null, pathName)
     }
 
-    console.log('Watching ' + pathName);
-
     inotify.addWatch(wd);
 
     watchAllSubdirectories(pathName);
@@ -65,38 +63,41 @@ function callback(pathName, event) {
 
     if (event.name) filename = path.join(pathName, event.name);
 
-    //the porpuse of this hell of 'if'
-    //statements is only illustrative.
+    if (filename.indexOf('.git') === -1){
 
-    if(mask & Inotify.IN_CREATE) {
-        if (Object.keys(data).length && data.filename === filename){
-            trigger (filename, "update");
-            data = {};
-        } else {
-            trigger (filename, "create");
+        //the porpuse of this hell of 'if'
+        //statements is only illustrative.
 
-        }
-        if (mask & Inotify.IN_ISDIR){
-            watch (filename);
-        } 
-    } else if(mask & Inotify.IN_DELETE) {
-        trigger (filename, "delete");
-    } else if(mask & Inotify.IN_MOVED_FROM) {
-        data = event;
-        data.filename = filename;
-    } else if(mask & Inotify.IN_MOVED_TO) {
-        if( Object.keys(data).length &&
-            data.cookie === event.cookie) {
-            if (/~$/.test(data.filename)){
-                trigger(filename, "update");
+        if(mask & Inotify.IN_CREATE) {
+            if (Object.keys(data).length && data.filename === filename){
+                trigger (filename, "update");
                 data = {};
-            } else if (/~$/.test(filename)){
-                //trigger(data.filename, "move", filename)
-                // let's leave the data as is...
             } else {
-                trigger (filename, "rename", data.filename);
+                trigger (filename, "create");
+
             }
-           
+            if (mask & Inotify.IN_ISDIR){
+                watch (filename);
+            } 
+        } else if(mask & Inotify.IN_DELETE) {
+            trigger (filename, "delete");
+        } else if(mask & Inotify.IN_MOVED_FROM) {
+            data = event;
+            data.filename = filename;
+        } else if(mask & Inotify.IN_MOVED_TO) {
+            if( Object.keys(data).length &&
+                data.cookie === event.cookie) {
+                if (/~$/.test(data.filename)){
+                    trigger(filename, "update");
+                    data = {};
+                } else if (/~$/.test(filename)){
+                    //trigger(data.filename, "move", filename)
+                    // let's leave the data as is...
+                } else {
+                    trigger (filename, "rename", data.filename);
+                }
+               
+            }
         }
     }
 }
