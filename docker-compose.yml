@@ -3,9 +3,14 @@ mimir:
   command: node /owldin/server.js
   ports:
     - "80:80"
+    - "8080:8080"
   links:
     - schema
     - raw
+  volumes:
+   - ./src/owldin:/owldin
+   - ./tools:/tools
+   - ~/.ssh:/root/.ssh
   volumes_from:
     - data
 raw:

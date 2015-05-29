@@ -1,5 +1,6 @@
 // probably want to move this to a config file at some point..
 var vfsRoot = window.location.protocol + "//" + window.location.host + "/vfs";
+var artifactVFSRoot = window.location.protocol + "//" + window.location.host + "/artifacts";
 var sockRoot = window.location.protocol + "//" + window.location.host + "/comms"
 
 // application level broker... 
@@ -11,7 +12,7 @@ var layout = app.layout = require('./components/layout.js')();
 // set up the socket communications with the server for terminals/file updates
 var remote = require('./lib/remote.js')(app, sockRoot);
 // get the virtual file system working...
-app.vfs = require('./lib/file-system').initialiseFileSystem(app, vfsRoot);
+app.vfs = require('./lib/file-system').initialiseFileSystem(app, vfsRoot, artifactVFSRoot);
 // initialise the entity selector. This MUST happen before the first vfs:sync event.
 var entitySelector = require('./components/entity-selector.js')(app, layout.nav);
 

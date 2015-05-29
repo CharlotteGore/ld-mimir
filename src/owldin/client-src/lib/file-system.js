@@ -5,7 +5,7 @@ var path = require('path')
 
 var console = require('../components/console.js');
 
-module.exports.initialiseFileSystem = function initialiseFileSystem (app, vfsRoot){
+module.exports.initialiseFileSystem = function initialiseFileSystem (app, vfsRoot, artifactsVFSRoot){
 
   var system = new (require('events')).EventEmitter;
 
@@ -124,6 +124,12 @@ module.exports.initialiseFileSystem = function initialiseFileSystem (app, vfsRoo
     return vfsRoot + pathName;
 
   } 
+
+  system.getArtifactURI = function getArtifactURI (pathName){
+
+    return artifactsVFSRoot + pathName;
+
+  }
 
   system.readFile = function readFile (pathName, fn){
 

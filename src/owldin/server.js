@@ -13,7 +13,9 @@ process.title = "owldin";
 // update this
 
 // command line args..
-var projectRoot = process.env.PROJECT_DIR || false;
+var projectRoot = process.env.PROJECT_DIR || "/git";
+var artifactsRoot = process.env.ARTIFACT_DIR || "/artifacts";
+
 var port = process.env.MIMIR_PORT || false;
 
 if (!projectRoot || !port) {
@@ -23,10 +25,23 @@ if (!projectRoot || !port) {
 
 
 var root = 'http://localhost:' + port + '/vfs/';
+var artifactsHTTPRoot = 'http://localhost:' + port  + '/artifacts/';
 
 // broker...
 
 var broker = new (require('events')).EventEmitter;
+
+// virtual file system...
+var vfs = require('vfs-local')({
+  root: projectRoot,
+  httpRoot: root,
+});
+
+var artifactsvfs = require('vfs-local')({
+  root: artifactsRoot,
+  httpRoot: artifactsHTTPRoot
+});
+
 
 // virtual file system...
 var vfs = require('vfs-local')({
@@ -93,6 +108,7 @@ function createApplicationAndBeginListening (port, vfs, broker){
   
   // file system over http..
   app.use(require('vfs-http-adapter')('/vfs/', vfs));
+  app.use(require('vfs-http-adapter')('/artifacts/', artifactsvfs))
 
   // just send a static file for the root...
   app.get('/', function (req, res){
