@@ -7,10 +7,10 @@ mimir:
   links:
     - schema
     - raw
-  volumes:
-   - ./src/owldin:/owldin
-   - ./tools:/tools
-   - ~/.ssh:/root/.ssh
+#  volumes:
+#   - ./src/owldin:/owldin
+#   - ./tools:/tools
+#   - ~/.ssh:/root/.ssh
   volumes_from:
     - data
 raw:

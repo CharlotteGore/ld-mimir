@@ -14,6 +14,7 @@ RUN cd /tools && \
     ./install.sh
 
 ENV PROJECT_DIR="/git"
+ENV ARTIFACT_DIR="/artifacts"
 ENV MIMIR_PORT=80
 
 EXPOSE  80
