@@ -20,3 +20,4 @@ data:
   image: nice/ld-docker-data
   volumes:
     - /git/
+    - /artifacts/
