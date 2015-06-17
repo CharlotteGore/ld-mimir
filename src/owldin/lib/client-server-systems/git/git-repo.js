@@ -4,6 +4,7 @@ var gitStatus = require('./git-status.js');
 var gitCommit = require('./git-commit.js');
 var gitPush = require('./git-push.js');
 var gitBuild = require('./project-build.js');
+var buildPatch = require('./build-patch.js');
 
 module.exports = function (repoPath){
 
@@ -19,6 +20,9 @@ module.exports = function (repoPath){
     },
     build : function (callback){
       return gitBuild(repoPath, callback);
+    },
+    buildPatch : function (patch, callback){
+      return buildPatch(patch, repoPath, callback)
     }
   }
 

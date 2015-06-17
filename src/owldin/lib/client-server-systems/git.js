@@ -75,6 +75,24 @@ module.exports = function (repoPath){
 
         })
 
+      },
+
+      'build-patch' : function (patch, conn){
+
+        console.log('building from patch...');
+
+        repo.buildPatch(patch, function (err, status){
+
+          console.log(status);
+
+          conn.write(JSON.stringify({
+            'build-patch' : {
+              success : !err,
+              result : status
+            }
+          }))
+
+        })
       }
 
     }
