@@ -79,8 +79,6 @@ module.exports = function (repoPath){
 
       'build-patch' : function (patch, conn){
 
-        console.log('building from patch...');
-
         repo.buildPatch(patch, function (err, status){
 
           console.log(status);
@@ -93,6 +91,39 @@ module.exports = function (repoPath){
           }))
 
         })
+      },
+
+      'get-head-hash' : function (msg, conn){
+
+        repo.revParse(function (err, hash){
+
+          console.log(err, hash);
+
+          conn.write(JSON.stringify({
+            'head-hash' : {
+              hash : hash
+            }
+          }));
+
+        });
+
+      },
+
+      'apply-bundle' : function (bundle, conn){
+
+        repo.applyBundle(bundle, function (err, status){
+
+          console.log(status);
+
+          conn.write(JSON.stringify({
+            'apply-bundle' : {
+              success : !err,
+              result : status
+            }
+          }))
+
+        });
+
       }
 
     }

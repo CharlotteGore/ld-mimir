@@ -5,6 +5,8 @@ var gitCommit = require('./git-commit.js');
 var gitPush = require('./git-push.js');
 var gitBuild = require('./project-build.js');
 var buildPatch = require('./build-patch.js');
+var gitRevParse = require('./git-rev-parse.js');
+var applyBundle = require('./git-bundle.js');
 
 module.exports = function (repoPath){
 
@@ -23,6 +25,12 @@ module.exports = function (repoPath){
     },
     buildPatch : function (patch, callback){
       return buildPatch(patch, repoPath, callback)
+    },
+    revParse : function (callback){
+      return gitRevParse(repoPath, callback);
+    },
+    applyBundle : function (bundle, callback){
+      return applyBundle(bundle, repoPath, callback);
     }
   }
 
